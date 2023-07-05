@@ -1,17 +1,20 @@
 #!/usr/bin/python3
 
 def canUnlockAll(boxes):
-    num_boxes = len(boxes)
-    unlocked = [False] * num_boxes
-    unlocked[0] = True
-    keys = [0]
+    # Implementation of the canUnlockAll function
+    # ...
 
-    while keys:
-        box = keys.pop()
-        for key in boxes[box]:
-            if key < num_boxes and not unlocked[key]:
-                unlocked[key] = True
-                keys.append(key)
+# Test cases
+if __name__ == '__main__':
+    # Test case 1
+    boxes = [[1], [2], [3], [4], []]
+    print(canUnlockAll(boxes))
 
-    return all(unlocked)
+    # Test case 2
+    boxes = [[1, 4, 6], [2], [0, 4, 1], [5, 6, 2], [3], [4, 1], [6]]
+    print(canUnlockAll(boxes))
+
+    # Test case 3
+    boxes = [[1, 4], [2], [0, 4, 1], [3], [], [4, 1], [5, 6]]
+    print(canUnlockAll(boxes))
 
