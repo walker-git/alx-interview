@@ -1,20 +1,21 @@
 #!/usr/bin/python3
+'''LockBoxes Challenge'''
+
 
 def canUnlockAll(boxes):
-    # Implementation of the canUnlockAll function
-    # ...
+    num_boxes = len(boxes)
+    visited = [False] * num_boxes   # Track visited boxes
+    visited[0] = True   # Mark first box as visited
+    stack = [0]   # Use a stack to perform depth-first search
 
-# Test cases
-if __name__ == '__main__':
-    # Test case 1
-    boxes = [[1], [2], [3], [4], []]
-    print(canUnlockAll(boxes))
+    while stack:
+        current_box = stack.pop()
 
-    # Test case 2
-    boxes = [[1, 4, 6], [2], [0, 4, 1], [5, 6, 2], [3], [4, 1], [6]]
-    print(canUnlockAll(boxes))
+        # Iterate throgh the keys in current box
+        for key in boxes[current_box]:
+            if key < num_boxes and not visited[key]:
+                visited[key] = True
+                stack.append(key)
 
-    # Test case 3
-    boxes = [[1, 4], [2], [0, 4, 1], [3], [], [4, 1], [5, 6]]
-    print(canUnlockAll(boxes))
-
+    # Check if all boxes have been visited
+    return all(visited)
