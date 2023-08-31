@@ -1,27 +1,28 @@
 #!/usr/bin/python3
-''' solving the island perimeter problem '''
+"""This module contains the function island_perimeter problem solution
+"""
 
 
 def island_perimeter(grid):
-    '''container function for dfs'''
-    visited = set()
+    """This function returns the perimeter of the island described in grid
+    """
 
-    def dfs(i, j):
-        '''dfs implementation'''
-        if i >= len(grid) or j >= len(grid[0]) or \
-            i < 0 or j < 0 or grid[i][j] == 0:
-            return 1
-        if (i, j) in visited:
-            return 0
-
-        visited.add((i, j))
-        perimeter = dfs(i, j + 1)
-        perimeter += dfs(i + 1, j)
-        perimeter += dfs(i, j - 1)
-        perimeter += dfs(i - 1, j)
-        return perimeter
-
-    for i in range(len(grid)):
-        for j in range(len(grid[0])):
-            if grid[i][j]:
-                return dfs(i, j)
+    if not grid:
+        return 0  # empty grid has no perimeter
+    perimeter = 0  # perimeter of the island
+    for row in range(len(grid)):  # rows in grid
+        for col in range(len(grid[row])):  # columns in grid
+            """ if the cell is land (1) then check the perimeter of the cell
+                and add it to the perimeter of the island described in grid
+            """
+            if grid[row][col] == 1:
+                perimeter += 4
+                # check top cell if exists
+                if row > 0 and grid[row - 1][col] == 1:
+                    # subtract 2 from perimeter if top cell is land
+                    perimeter -= 2
+                    # check left cell if exists
+                if col > 0 and grid[row][col - 1] == 1:
+                    # subtract 2 from perimeter if left cell is land
+                    perimeter -= 2
+    return perimeter  # return perimeter of the island
